@@ -1,0 +1,149 @@
+\documentclass{../template/labo}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ucs}
+\usepackage{amsthm} %numéroter les questions
+\usepackage{datetime}
+\usepackage{xspace} % typographie IN
+\usepackage{hyperref}% hyperliens
+\usepackage[all]{hypcap} %lien pointe en haut des figures
+\usepackage[french]{varioref} %voir x p y
+\usepackage{fancyhdr}% en têtes
+\usepackage[]{graphicx} %include pictures
+% \usepackage{pgfplots}
+\usepackage[americanresistors,siunitx]{circuitikz}
+\usepackage[]{gnuplottex}
+\usepackage{ifthen}
+\usepackage{mathastext} % math as standfard text : units are respecting typography conventions.
+\usepackage[]{subfig}
+\usepackage[]{attachfile}
+\usepackage{tikz}
+\usetikzlibrary{babel,positioning,calc}
+\usepackage{siunitx}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage[normalem]{ulem}
+\usepackage{minted}
+\setminted[matlab]{
+frame=lines,
+framesep=2mm,
+% baselinestretch=1.2,
+fontsize=\small,
+% linenos,
+breaklines
+}
+\usepackage{framed}
+\usepackage{charter}
+
+%%%%%%%%%%%%
+% Tables
+%%%%%%%%%%%%
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.1} % Opens up the table a tad
+\usepackage{multicol}
+\usepackage{multirow}
+
+\newboolean{koriG}
+\ifx\koriG\undefined
+\correction{false}
+\else
+\correction{true}
+\fi
+
+\newcommand{\itgv}[1]{\ifthenelse{\boolean{corrige}}{{\color{blue}#1}}{}} %si corrigé vrai...
+\newcommand{\ifgv}[1]{\ifthenelse{\boolean{corrige}}{}{#1}} %si corrigé vrai...
+\newcommand{\matlab}{\textsc{matlab}}
+
+% \correction{false}
+%\correction{true}
+
+
+%% fancy header & foot
+\pagestyle{fancy}
+\lhead{[CF5L-L1] Signal Processing\\ IIR filters}
+\rhead{v1.0.0 \\ page \thepage}
+\chead{\ifthenelse{\boolean{corrige}}{Corrigé}{}}
+\cfoot{}
+%%
+
+\author{DLH}
+
+\setlength{\parindent}{0pt}
+
+
+\begin{document}
+\tptitle{}{Labs Part II\\\vspace*{.8em}Infinite Impulse Response Filters Design}
+
+Where FIR digital filters are \textit{finite} by definition, analogue filter know no such limitations.
+Infinite Impulse Response (IIR) filters try to mimic their behaviour by having a feedback loop in the convolution product of their digital implementation.
+
+Whilst there is are dedicated \texttt{fir1} and \texttt{fir2} \matlab functions to design FIR filters, IIR filters have no equivalent.
+Instead there are individual functions for each filter type that come either in digital or simulated analogue flavours\footnote{To switch to an analogue filter, append \texttt{'s'} at the end of the function parameters.}.
+Said flavours are as follows:
+\begin{itemize}
+  \item Bessel (analogue only): \href{https://nl.mathworks.com/help/signal/ref/besself.html}{\texttt{bessel}}
+  \item Butterworth: \href{https://nl.mathworks.com/help/signal/ref/butter.html}{\texttt{butter}}
+  \item Chebychev Type I: \href{https://nl.mathworks.com/help/signal/ref/cheby1.html}{\texttt{cheby1}}
+  \item Chebychev Type II: \href{https://nl.mathworks.com/help/signal/ref/cheby2.html}{\texttt{cheby2}}
+  \item Elliptic: \href{https://nl.mathworks.com/help/signal/ref/ellip.html}{\texttt{ellip}}
+\end{itemize}
+
+\begin{leftbar}
+Explore the \href{https://nl.mathworks.com/help/signal/ug/iir-filter-design.html}{documentations} as to get a grip on how to design basic IIR filters.
+\end{leftbar}
+
+\subsection*{From FIR to IIR}
+
+Re-take your FIR filters you have designed to clean up the audio in the previous part.
+Re-implement them using IIR filters and analyse the gain in filter order for similar performance.
+
+
+
+\subsection*{Analogue vs FIR vs IIR}
+
+Consider a regular low-pass analogue fourth order filter with a cut-off frequency $f_c$.
+Design an FIR filter that can reach the same attenuation as the Butterworth filter at $f = 10\cdot f_c$, and no more than 3dB ripple in the bandpass.
+Also design an IIR filter with the same specifications.
+Do so for \textbf{Butterworth} and \textbf{Chebychev} filters.
+
+Once it's done, compare the performance of the three filters on the following criteria:
+\begin{itemize}
+  \item Frequency response.
+  \item Attenuation at $10\cdot f_c$.
+  \item Ripple in the bandpass.
+  \item Ripple in the stopband.
+  \item Filter order required\footnote{Only the analogue filter needs to be a 4\textsuperscript{th} order. The digital FIR and IIR filters might be different.}.
+\end{itemize}
+
+
+
+\section*{Assignment}
+The assignment consist of:
+\begin{enumerate}
+  \item Your filter from the previous part in IIR form.
+  \item The comparison between analogue, FIR and IIR filters as described in the previous section.
+\end{enumerate}
+You should upload your code and a maximum 3 pages report to Claco by the due date indicated on the platform.
+
+Evaluation criteria:
+\begin{itemize}
+  \item The report is clear and well written. (2 points)
+  \item The new IIR filter has similar performance compared to the old FIR filter and the analysis is sound. (3 points)
+  \item The two times (Butterworth and Chebychev) three filters (analogue, FIr and IIR) where successfully implemented. (3 points)
+  \item A interesting analysis is derived from the comparison of the filters. (2 points)
+  \item The report is in English. (1 bonus point)
+\end{itemize}
+
+
+
+
+\section*{Resource}
+\begin{itemize}
+	\item \href{https://www.mathworks.com/help/signal/referencelist.html?type=function&category=filter-design&s_tid=CRUX_topnav}{Filter design functions for \matlab}
+  \item \href{https://octave.sourceforge.io/signal/overview.html}{Octave signal processing functions}
+\end{itemize}
+
+
+\end{document}
