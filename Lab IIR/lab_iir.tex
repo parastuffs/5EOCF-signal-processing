@@ -63,7 +63,7 @@ breaklines
 %% fancy header & foot
 \pagestyle{fancy}
 \lhead{[CF5L-L1] Signal Processing\\ IIR filters}
-\rhead{v1.0.0 \\ page \thepage}
+\rhead{v1.0.1 \\ page \thepage}
 \chead{\ifthenelse{\boolean{corrige}}{Corrigé}{}}
 \cfoot{}
 %%
@@ -85,8 +85,8 @@ Said flavours are as follows:
 \begin{itemize}
   \item Bessel (analogue only): \href{https://nl.mathworks.com/help/signal/ref/besself.html}{\texttt{bessel}}
   \item Butterworth: \href{https://nl.mathworks.com/help/signal/ref/butter.html}{\texttt{butter}}
-  \item Chebychev Type I: \href{https://nl.mathworks.com/help/signal/ref/cheby1.html}{\texttt{cheby1}}
-  \item Chebychev Type II: \href{https://nl.mathworks.com/help/signal/ref/cheby2.html}{\texttt{cheby2}}
+  \item Chebyshev Type I: \href{https://nl.mathworks.com/help/signal/ref/cheby1.html}{\texttt{cheby1}}
+  \item Chebyshev Type II: \href{https://nl.mathworks.com/help/signal/ref/cheby2.html}{\texttt{cheby2}}
   \item Elliptic: \href{https://nl.mathworks.com/help/signal/ref/ellip.html}{\texttt{ellip}}
 \end{itemize}
 
@@ -106,7 +106,7 @@ Re-implement them using IIR filters and analyse the gain in filter order for sim
 Consider a regular low-pass analogue fourth order filter with a cut-off frequency $f_c$.
 Design an FIR filter that can reach the same attenuation as the Butterworth filter at $f = 10\cdot f_c$, and no more than 3dB ripple in the bandpass.
 Also design an IIR filter with the same specifications.
-Do so for \textbf{Butterworth} and \textbf{Chebychev} filters.
+Do so for \textbf{Butterworth} and \textbf{Chebyshev} filters.
 
 Once it's done, compare the performance of the three filters on the following criteria:
 \begin{itemize}
@@ -131,7 +131,7 @@ Evaluation criteria:
 \begin{itemize}
   \item The report is clear and well written. (2 points)
   \item The new IIR filter has similar performance compared to the old FIR filter and the analysis is sound. (3 points)
-  \item The two times (Butterworth and Chebychev) three filters (analogue, FIr and IIR) where successfully implemented. (3 points)
+  \item The two times (Butterworth and Chebyshev) three filters (analogue, FIr and IIR) where successfully implemented. (3 points)
   \item A interesting analysis is derived from the comparison of the filters. (2 points)
   \item The report is in English. (1 bonus point)
 \end{itemize}
